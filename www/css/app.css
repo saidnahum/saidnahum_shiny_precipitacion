@@ -1,0 +1,634 @@
+:root {
+   --color-bg: #f7f8fa;
+   --color-surface: #ffffff;
+   --color-border: #e2e6ec;
+   --color-text: #1f2933;
+   --color-muted: #5b6573;
+   --color-accent: #2c5282;
+   --color-accent-soft: #ebf2f9;
+   --radius: 8px;
+   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04),
+               0 1px 3px rgba(15, 23, 42, 0.06);
+   --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+html,
+body {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   font-family: var(--font-stack);
+   color: var(--color-text);
+   background: var(--color-bg);
+   -webkit-font-smoothing: antialiased;
+}
+
+.container-fluid {
+   max-width: 100% !important;
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+/* === Diseñó de grid para el layout ============================================ */
+
+.app-layout {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: auto 1fr auto;
+   min-height: 100vh;
+   width: 100%;
+}
+
+.app-content {
+   display: grid;
+   grid-template-columns: 1fr;
+   grid-template-rows: auto 1fr;
+   min-height: 0;
+}
+
+.app-header {
+   padding: 6px 16px;
+   background: var(--color-surface);
+   border-bottom: 1px solid var(--color-border);
+   text-align: center;
+}
+
+.app-header h2 {
+   margin: 0 0 2px 0;
+   font-size: 18px!important;
+   font-weight: 600;
+   letter-spacing: -0.01em;
+}
+
+#app-title {
+   display: inline;
+}
+
+.app-main {
+   position: relative;
+   min-height: 60vh;
+   background: var(--color-bg);
+   display: flex;
+   padding: 0;
+   margin: 0;
+   width: 100%;
+   min-width: 0;
+}
+
+/* === Loader overlay ========================================== */
+
+.map-loader {
+   position: absolute;
+   inset: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 12px;
+   background: var(--color-bg);
+   z-index: 10;
+   transition: opacity 0.3s ease-out;
+}
+
+.map-loader.is-hidden {
+   opacity: 0;
+   pointer-events: none;
+}
+
+.map-loader-spinner {
+   width: 56px;
+   height: 56px;
+   border: 5px solid var(--color-border);
+   border-top-color: var(--color-accent);
+   border-radius: 50%;
+   animation: map-loader-spin 0.9s linear infinite;
+}
+
+.map-loader-text {
+   font-size: 16px;
+   color: var(--color-muted);
+   letter-spacing: 0.02em;
+   font-weight: 500;
+}
+
+@keyframes map-loader-spin {
+   to { transform: rotate(360deg); }
+}
+
+/* === Barra de herramientas (mobile first) ================== */
+
+.app-toolbar {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 8px;
+   padding: 10px 12px;
+   background: var(--color-surface);
+   border-bottom: 1px solid var(--color-border);
+}
+
+.control-group {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 4px;
+   width: 100%;
+   max-width: 480px;
+}
+
+.control-label {
+   font-size: 11px;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+   color: var(--color-muted);
+}
+
+.control-group .form-group,
+.control-group .shiny-input-container {
+   margin: 0;
+}
+
+.control-description {
+   background: var(--color-bg);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius);
+   padding: 10px 14px;
+   box-sizing: border-box;
+}
+
+.control-description h4 {
+   margin: 0 0 4px 0;
+   font-size: 11px;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+   color: var(--color-muted);
+   text-align: center;
+}
+
+.control-description p {
+   margin: 0;
+   font-size: 12px;
+   line-height: 1.4;
+   color: var(--color-muted);
+   text-align: center;
+}
+
+select.form-control {
+   width: 100%;
+   padding: 6px 10px;
+   font-size: 13px;
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius);
+   background: var(--color-surface);
+   color: var(--color-text);
+}
+
+/* === Estadísticas ================================ */
+
+.stats {
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+   gap: 6px;
+   width: 100%;
+   max-width: 480px;
+   margin: 8px auto 0 auto;
+   padding: 10px 10px;
+   background: var(--color-bg);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius);
+   box-sizing: border-box;
+}
+
+.stat {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 1px;
+   flex: 1 1 0;
+   min-width: 0;
+}
+
+.stat-label {
+   font-size: 10px;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.04em;
+   color: var(--color-muted);
+}
+
+.stat-value {
+   font-size: 11.5px;
+   font-weight: 600;
+   color: var(--color-text);
+   font-variant-numeric: tabular-nums;
+   white-space: nowrap;
+}
+
+/* === Botón de descarga ========================================= */
+
+.btn-download {
+   align-self: center;
+   padding: 6px 14px;
+   font-size: 13px;
+   font-weight: 500;
+   background: var(--color-accent);
+   color: #fff;
+   border: 0;
+   border-radius: var(--radius);
+   cursor: pointer;
+   text-decoration: none;
+   display: inline-block;
+}
+
+.btn-download:hover {
+   background: #22426a;
+}
+
+/* === Ifram del mapa ============================================== */
+
+.map-iframe {
+   width: 100%;
+   height: 100%;
+   border: 0;
+   display: block;
+   background: var(--color-bg);
+}
+
+/* === Diseño para escritorio ============================= */
+
+@media (min-width: 768px) {
+   .app-header {
+      padding: 8px 20px;
+   }
+
+   .app-header h2 {
+      font-size: 16px;
+   }
+
+   .app-content {
+      grid-template-columns: minmax(260px, 20%) 1fr;
+      grid-template-rows: 1fr;
+   }
+
+   .app-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 20px;
+      padding: 20px 16px;
+      border-bottom: 0;
+      border-right: 1px solid var(--color-border);
+      height: 100%;
+      min-height: 60vh;
+   }
+
+   .control-group {
+      width: 100%;
+      max-width: none;
+      align-items: stretch;
+   }
+
+   .control-label {
+      font-size: 12px;
+   }
+
+   select.form-control {
+      font-size: 14px;
+      padding: 8px 10px;
+   }
+
+   .control-estado {
+      min-width: 0;
+   }
+
+   .stats {
+      gap: 12px 16px;
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      padding: 12px 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: center;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+   }
+
+   .stat {
+      align-items: center;
+      text-align: center;
+   }
+
+   .stat-value {
+      font-size: 12px;
+   }
+
+   .btn-download {
+      font-size: 14px;
+      padding: 8px 14px;
+      align-self: stretch;
+      text-align: center;
+   }
+}
+
+/* === Metadatos en el Footer ============================== */
+
+.app-metadata--sidebar {
+   display: none;
+}
+
+.app-footer {
+   background: var(--color-surface, #ffffff);
+   border-top: 1px solid var(--color-border, #e5e7eb);
+   padding: 12px 16px;
+   font-family: var(--font-stack, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+   font-size: 12px;
+   color: var(--color-muted, #6b7280);
+   display: flex;
+   flex-direction: column-reverse;
+   align-items: center; 
+   gap: 10px;
+   flex: 0 0 auto;
+}
+
+/* === Metadatos toggle ====================== */
+.footer-toggle {
+   align-self: center;
+   display: inline-flex;
+   align-items: center;
+   gap: 6px;
+   background: transparent;
+   border: 1px solid var(--color-border, #e5e7eb);
+   border-radius: 4px;
+   padding: 4px 10px;
+   font: inherit;
+   font-weight: 600;
+   color: var(--color-text, #1a1a1a);
+   cursor: pointer;
+   user-select: none;
+   transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.footer-toggle:hover {
+   background: #f3f4f6;
+   border-color: #d1d5db;
+}
+
+.footer-toggle:focus {
+   outline: 2px solid #2c5282;
+   outline-offset: 1px;
+}
+
+.footer-toggle-caret {
+   font-size: 10px;
+   transition: transform 0.2s ease;
+   color: var(--color-muted, #6b7280);
+}
+
+.footer-toggle.is-open .footer-toggle-caret {
+   transform: rotate(180deg);
+}
+
+/* === Panel de metadatos ========================== */
+
+.footer-metadata {
+   background: #f9fafb;
+   border: 1px solid var(--color-border, #e5e7eb);
+   border-radius: 4px;
+   padding: 10px 14px;
+}
+
+.footer-metadata-list {
+   margin: 0;
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: 4px 16px;
+}
+
+.footer-metadata-list dt {
+   font-weight: 600;
+   color: var(--color-text, #1a1a1a);
+   margin-top: 4px;
+}
+
+.footer-metadata-list dt:first-of-type {
+   margin-top: 0;
+}
+
+.footer-metadata-list dd {
+   margin: 0 0 4px 0;
+   color: var(--color-muted, #6b7280);
+   font-variant-numeric: tabular-nums;
+}
+
+.footer-brand {
+   align-self: center;
+   text-align: center;
+   font-size: 13px;
+   color: var(--color-muted, #6b7280);
+   letter-spacing: 0.01em;
+}
+
+.footer-brand-link {
+   color: #2c5282;
+   text-decoration: none;
+   font-weight: 600;
+   border-bottom: 1px dotted transparent;
+   transition: border-color 0.15s ease;
+}
+
+.footer-brand-link:hover {
+   border-bottom-color: #2c5282;
+}
+
+.footer-brand-link:focus {
+   outline: 2px solid #2c5282;
+   outline-offset: 2px;
+   border-radius: 2px;
+}
+
+/* === Diseño para escritorio (>=768px) ============================== */
+
+@media (min-width: 768px) {
+   .app-footer {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 4px 20px;
+   }
+
+   .footer-toggle,
+   .footer-metadata {
+      display: none;
+   }
+
+   .footer-toggle {
+      align-self: auto;
+   }
+
+   .footer-brand {
+      align-self: auto;
+      text-align: right;
+   }
+
+   .footer-metadata {
+      flex-basis: 100%;
+   }
+
+   .footer-metadata-list {
+      grid-template-columns: repeat(4, max-content);
+      column-gap: 28px;
+      align-items: baseline;
+   }
+
+   .footer-metadata-list dt {
+      margin-top: 0;
+   }
+
+   .footer-metadata-list dd {
+      margin-bottom: 0;
+   }
+
+   .footer-brand {
+      align-self: auto;
+      white-space: nowrap;
+   }
+
+   .app-metadata--sidebar {
+      display: block;
+      width: 100%;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      box-sizing: border-box;
+   }
+
+   .app-metadata--sidebar h4 {
+      text-align: left;
+      margin: 0 0 8px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-muted);
+   }
+
+   .app-metadata--sidebar .footer-metadata-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+   }
+
+   .app-metadata--sidebar .footer-metadata-list dt {
+      margin: 0;
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      line-height: 1.2;
+   }
+
+   .app-metadata--sidebar .footer-metadata-list dd {
+      margin: 1px 0 0 0;
+      font-size: 11.5px;
+      font-weight: 500;
+      line-height: 1.3;
+      color: var(--color-text);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+   }
+
+   .app-metadata--sidebar,
+   .app-metadata--sidebar .footer-metadata-list,
+   .app-metadata--sidebar .footer-metadata-list dt,
+   .app-metadata--sidebar .footer-metadata-list dd {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+   }
+   
+   .app-toolbar > .app-metadata--sidebar {
+      min-width: 0;
+      flex-shrink: 1;
+   }
+}
+
+/* === Driver.js ============================*/
+.driverjs-saidmontes .driver-popover {
+   background: #ffffff;
+   color: #1f2933;
+   border: 1px solid #e2e6ec;
+   border-radius: 8px;
+   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.08);
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   font-size: 13px;
+   line-height: 1.45;
+   max-width: 320px;
+   padding: 12px 14px;
+}
+
+.driverjs-saidmontes .driver-popover-title {
+   font-size: 14px;
+   font-weight: 600;
+   color: #1f2933;
+   margin: 0 0 4px 0;
+}
+
+.driverjs-saidmontes .driver-popover-description {
+   color: #5b6573;
+   margin: 0;
+}
+
+.driverjs-saidmontes .driver-popover-footer {
+   margin-top: 10px;
+   display: flex;
+   gap: 8px;
+   justify-content: flex-end;
+}
+
+.driverjs-saidmontes .driver-popover-prev-btn,
+.driverjs-saidmontes .driver-popover-next-btn {
+   background: #2c5282;
+   color: #ffffff;
+   border: 0;
+   border-radius: 6px;
+   padding: 6px 12px;
+   font-size: 12px;
+   font-weight: 500;
+   cursor: pointer;
+   text-shadow: none;
+}
+
+.driverjs-saidmontes .driver-popover-prev-btn:hover,
+.driverjs-saidmontes .driver-popover-next-btn:hover {
+   background: #2c5282;
+   color: #ffffff;
+}
+
+.driverjs-saidmontes .driver-popover-prev-btn {
+   background: #f3f4f6;
+   color: #1f2933;
+}
+
+.driverjs-saidmontes .driver-popover-close-btn {
+   color: #5b6573;
+}
+
+.driverjs-saidmontes .driver-popover-progress-text {
+   color: #5b6573;
+   font-size: 11px;
+}

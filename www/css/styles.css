@@ -1,0 +1,242 @@
+html,
+body {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+}
+
+.tour-control {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 132px;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   font-size: 12px;
+   color: #333;
+}
+
+.tour-launcher {
+   position: relative;
+   display: inline-flex;
+}
+
+.tour-icon-btn {
+   width: 32px;
+   height: 32px;
+   padding: 2px;
+   border: 2px solid #9ca3af;
+   border-radius: 6px;
+   background: #f9fafb;
+   cursor: pointer;
+   color: #1a1a1a;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.tour-icon-btn:hover {
+   background: #f3f4f6;
+}
+
+.tour-icon-btn:focus {
+   outline: none;
+}
+
+.driverjs-saidmontes .driver-popover {
+   background: #ffffff;
+   color: #1f2933;
+   border: 1px solid #e2e6ec;
+   border-radius: 8px;
+   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.08);
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   font-size: 13px;
+   line-height: 1.45;
+   max-width: 320px;
+   padding: 12px 14px;
+}
+
+.driverjs-saidmontes .driver-popover-title {
+   font-size: 14px;
+   font-weight: 600;
+   color: #1f2933;
+   margin: 0 0 4px 0;
+}
+
+.driverjs-saidmontes .driver-popover-description {
+   color: #5b6573;
+   margin: 0;
+}
+
+.driverjs-saidmontes .driver-popover-footer {
+   margin-top: 10px;
+   display: flex;
+   gap: 8px;
+   justify-content: flex-end;
+}
+
+.driverjs-saidmontes .driver-popover-prev-btn,
+.driverjs-saidmontes .driver-popover-next-btn {
+   background: #2c5282;
+   color: #ffffff;
+   border: 0;
+   border-radius: 6px;
+   padding: 6px 12px;
+   font-size: 12px;
+   font-weight: 500;
+   cursor: pointer;
+   text-shadow: none;
+}
+
+.driverjs-saidmontes .driver-popover-prev-btn {
+   background: #f3f4f6;
+   color: #1f2933;
+}
+
+.driverjs-saidmontes .driver-popover-close-btn {
+   color: #5b6573;
+}
+
+.driverjs-saidmontes .driver-popover-progress-text {
+   color: #5b6573;
+   font-size: 11px;
+}
+
+#map {
+   height: 100vh;
+   width: 100%;
+}
+
+.map-error {
+   padding: 20px;
+   color: #b00;
+}
+
+.leaflet-popup-content {
+   font-size: 13px;
+   line-height: 1.4;
+}
+
+/* === Opacity control (top-left, under the zoom) ============== */
+.opacity-control {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 84px;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   font-size: 12px;
+   color: #333;
+}
+
+.opacity-icon-btn {
+   width: 32px;
+   height: 32px;
+   padding: 2px;
+   border: 2px solid #9ca3af;
+   border-radius: 6px; 
+   background: #f9fafb;  
+   cursor: pointer;
+   color: #1a1a1a;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.opacity-icon-btn:hover {
+   background: #f3f4f6; 
+}
+
+.opacity-icon-btn:focus {
+   outline: none;
+}
+
+.opacity-slider {
+   display: none;
+   position: absolute;
+   left: 0;
+   top: 100%;
+   margin-top: 8px;          
+   width: 32px;               
+   height: 6px;
+   cursor: pointer;
+   accent-color: #9ca3af;  
+}
+
+.opacity-slider:focus {
+   outline: none;
+}
+
+.opacity-control.is-open .opacity-slider {
+   display: block;
+}
+
+.map-legend-control {
+   margin: 12px !important;
+   background: #fff;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   border-radius: 4px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   font-size: 12px;
+   color: #333;
+   padding: 8px 10px;
+}
+
+.map-legend-control .legend {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   margin: 0;
+}
+
+.map-legend-control .legend-title {
+   font-weight: 600;
+   color: #1a1a1a;
+   white-space: nowrap;
+}
+
+.map-legend-control .legend-bar {
+   display: flex;
+   height: 12px;
+   width: 140px;
+   border: 1px solid rgba(0, 0, 0, 0.15);
+   border-radius: 2px;
+   overflow: hidden;
+   flex: 0 0 auto;
+}
+
+.map-legend-control .legend-swatch {
+   flex: 1 1 0;
+   height: 100%;
+   display: block;
+}
+
+.map-legend-control .legend-scale {
+   font-variant-numeric: tabular-nums;
+   color: #555;
+   white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+   .map-legend-control {
+      font-size: 10px;
+      padding: 4px 6px;
+      margin: 8px 8px 32px 8px !important;
+   }
+
+   .map-legend-control .legend {
+      gap: 4px;
+   }
+
+   .map-legend-control .legend-bar {
+      width: 75px;
+      height: 8px;
+   }
+
+   .map-legend-control .legend-title {
+      font-size: 10px;
+   }
+
+   .map-legend-control .legend-scale {
+      font-size: 10px;
+   }
+}

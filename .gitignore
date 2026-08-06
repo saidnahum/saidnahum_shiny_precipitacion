@@ -1,0 +1,8 @@
+.venv
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env/
+.envs/
+codigo_fuente_postulacion.zip
